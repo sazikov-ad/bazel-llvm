@@ -1,0 +1,22 @@
+load("@rules_cc//cc:defs.bzl", "cc_library", "cc_test")
+
+cc_library(
+    name = "stdlib",
+    srcs = ["stdlib.cc"],
+    hdrs = ["stdlib.h"],
+)
+
+cc_test(
+    name = "stdlib_test",
+    srcs = ["stdlib_test.cc"],
+    deps = [":stdlib"],
+)
+
+sh_test(
+    name = "file_dependency_test",
+    srcs = ["file_dependency_test.sh"],
+    data = [
+        "@llvm_toolchain//:bin/clang-format",
+        "@llvm_toolchain//:lib/libc++.a",
+    ],
+)
