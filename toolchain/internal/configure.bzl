@@ -1,10 +1,10 @@
 load(
-    "@com_github_chat_toolchain//toolchain/internal:llvm_distributions.bzl",
+    "@com_bazel_llvm_toolchain//toolchain/internal:llvm_distributions.bzl",
     _download_llvm = "download_llvm",
     _download_llvm_preconfigured = "download_llvm_preconfigured",
 )
 load(
-    "@com_github_chat_toolchain//toolchain/internal:sysroot.bzl",
+    "@com_bazel_llvm_toolchain//toolchain/internal:sysroot.bzl",
     _sysroot_path = "sysroot_path",
 )
 load("@rules_cc//cc:defs.bzl", _cc_toolchain = "cc_toolchain")
@@ -44,27 +44,27 @@ def llvm_toolchain_impl(rctx):
 
     rctx.template(
         "toolchains.bzl",
-        Label("@com_github_chat_toolchain//toolchain:toolchains.bzl.tpl"),
+        Label("@com_bazel_llvm_toolchain//toolchain:toolchains.bzl.tpl"),
         substitutions,
     )
     rctx.template(
         "cc_toolchain_config.bzl",
-        Label("@com_github_chat_toolchain//toolchain:cc_toolchain_config.bzl.tpl"),
+        Label("@com_bazel_llvm_toolchain//toolchain:cc_toolchain_config.bzl.tpl"),
         substitutions,
     )
     rctx.template(
         "bin/cc_wrapper.sh",  # Co-located with the linker to help rules_go.
-        Label("@com_github_chat_toolchain//toolchain:cc_wrapper.sh.tpl"),
+        Label("@com_bazel_llvm_toolchain//toolchain:cc_wrapper.sh.tpl"),
         substitutions,
     )
     rctx.template(
         "Makevars",
-        Label("@com_github_chat_toolchain//toolchain:Makevars.tpl"),
+        Label("@com_bazel_llvm_toolchain//toolchain:Makevars.tpl"),
         substitutions,
     )
     rctx.template(
         "BUILD",
-        Label("@com_github_chat_toolchain//toolchain:BUILD.tpl"),
+        Label("@com_bazel_llvm_toolchain//toolchain:BUILD.tpl"),
         substitutions,
     )
 

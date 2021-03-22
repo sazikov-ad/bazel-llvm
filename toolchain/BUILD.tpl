@@ -51,7 +51,7 @@ toolchain(
     toolchain_type = "@bazel_tools//tools/cpp:toolchain_type",
 )
 
-load("@com_github_chat_toolchain//toolchain:rules.bzl", "conditional_cc_toolchain")
+load("@com_bazel_llvm_toolchain//toolchain:rules.bzl", "conditional_cc_toolchain")
 
 conditional_cc_toolchain("cc-clang-linux", %{absolute_paths})
 
